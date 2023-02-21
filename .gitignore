@@ -1,2 +1,4 @@
 .DS_Store
 *packer_compiled.lua
+zsh/zshalias
+zsh/zshenv

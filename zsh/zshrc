@@ -1,0 +1,41 @@
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _complete _ignored _approximate
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]} m:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|[._-]=* r:|=*'
+zstyle ':completion:*' max-errors 3
+zstyle ':completion:*' prompt '%e'
+zstyle ':completion:*' squeeze-slashes true
+zstyle :compinstall filename '/home/goose/.zshrc'
+
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' menu select=1
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+
+autoload -U compinit
+compinit
+# End of lines added by compinstall
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.cache/zsh/zshhist
+HISTSIZE=1000
+SAVEHIST=1000
+setopt autocd
+unsetopt beep
+bindkey -v
+# End of lines configured by zsh-newuser-install
+
+# Plugins
+source ~/.config/zsh/zshvimodes
+
+# Prompt
+setopt PROMPT_SUBST
+PROMPT='%F{green}%n%f%F{cyan}@%f%F{blue}%m%#%f%F{magenta}%~>%f'
+RPROMPT='%B${vim_mode}%b%(?..[%?])'
+
+
+source ~/.profile
+source ~/.config/zsh/zshenv
+source ~/.config/zsh/zshalias
+
+#wal colorscheme
+[ -f "$HOME/.cache/wal/colors-tty.sh" ] && source ~/.cache/wal/colors-tty.sh ; true
