@@ -29,6 +29,23 @@ return require('packer').startup(function(use)
         'kdheepak/cmp-latex-symbols',
         requires = { 'hrsh7th/nvim-cmp' }
     }
+    use {
+        'hrsh7th/cmp-emoji',
+        requires = { 'hrsh7th/nvim-cmp' }
+    }
+    use {
+        'hrsh7th/cmp-path',
+        requires = { 'hrsh7th/nvim-cmp' }
+    }
+    use {
+        'L3MON4D3/LuaSnip',
+        tag = "v1.*",
+        run = "make install_jsregexp"
+    }
+    use {
+        'saadparwaiz1/cmp_luasnip',
+        requires = { {'hrsh7th/nvim-cmp'}, {'L3MON4D3/LuaSnip'}}
+    }
 
 
     -- pandoc
@@ -77,6 +94,7 @@ return require('packer').startup(function(use)
             require('bufferline').setup()
         end
     }
+
 
     -- cosmetic
     use { "catppuccin/nvim", as = "catppuccin" } -- colorscheme
