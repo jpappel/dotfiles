@@ -48,3 +48,6 @@ vim.opt.termguicolors = true
 
 -- leader
 vim.g.mapleader = " "
+
+-- tex syntax highlighting
+vim.g.tex_flavor = "latex"
