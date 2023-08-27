@@ -1,4 +1,6 @@
 .DS_Store
 *packer_compiled.lua
+*lazy-lock.json
 zsh/zshalias
 zsh/zshenv
+nvim/spell/*

@@ -4,11 +4,27 @@
 
 HOME = os.getenv("HOME")
 
+-- bootstrap lazynvim if not installed
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+-- leader
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
+require("lazy").setup('plugins')
 require('keymap')
-require('plugins')
-require('colorscheme')
--- require('statusline')
--- require('bufferline')
+require('lsp')
 
 -- General Config
 vim.opt.number = true
@@ -44,10 +60,6 @@ vim.opt.visualbell = true
 
 -- term settings
 vim.opt.termguicolors = true
-
-
--- leader
-vim.g.mapleader = " "
 
 -- tex syntax highlighting
 vim.g.tex_flavor = "latex"
