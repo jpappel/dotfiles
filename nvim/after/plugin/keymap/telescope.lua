@@ -8,13 +8,18 @@ nnoremap("<Leader>ff", function()
 end)
 
 -- find buffer
-nnoremap("<leader>fb", function()
+nnoremap("<Leader>fb", function()
     builtin.buffers()
 end)
 
 -- grep find
 nnoremap("<Leader>gf", function()
     builtin.live_grep()
+end)
+
+-- lsp find refrences
+nnoremap("<Leader>fr", function()
+    builtin.lsp_references()
 end)
 
 -- -- find git, lists git pickers

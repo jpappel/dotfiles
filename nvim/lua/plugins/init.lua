@@ -29,6 +29,12 @@ return {
     {
         'numToStr/Comment.nvim', -- faster commentting
         lazy = false,
+        opts = {
+            mappings = {
+                basic = true,
+                extra = false
+            }
+        },
         -- config = function()
         --     require('Comment').setup()
         -- end

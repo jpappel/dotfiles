@@ -4,9 +4,13 @@ lsp.preset({})
 
 lsp.ensure_installed({
     'pylsp',
-    'gopls',
+    'html',
+    -- 'java_language_server',
+    -- 'ltex',
+    'lua_ls',
+    --'gopls',
     'tsserver',
-    'rust_analyzer'
+    --'rust_analyzer'
 })
 
 lsp.on_attach(function(client, bufnr)
@@ -19,6 +23,9 @@ lsp.set_preferences({
     sign_icons = { }
 })
 
+
+-- LS configs
+--
 require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
 
