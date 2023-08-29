@@ -8,5 +8,7 @@
     * [ ] adjust nvim statusline
     * [ ] try nvim-neo-tree/neo-tree.nvim
     * [ ] try ThePrimeagen/harpoon
+    * [ ] config sql ls
+        * [](https://github.com/joe-re/sql-language-server)
 * newsboat
     * [ ] upload config
