@@ -40,6 +40,11 @@ return {
         -- end
     },
 
+    {
+        'ap/vim-css-color',
+        ft = {'css'}
+    }
+
     -- cosmetic
     -- 'kyazdani42/nvim-web-devicons',
 
