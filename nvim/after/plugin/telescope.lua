@@ -3,6 +3,7 @@ local builtin = require('telescope.builtin')
 local nnoremap = Remap.nnoremap
 
 -- find file
+-- TODO: add netrw open bind within context
 nnoremap("<Leader>ff", function()
     builtin.find_files()
 end)
@@ -19,7 +20,13 @@ end)
 
 -- lsp find refrences
 nnoremap("<Leader>fr", function()
-    builtin.lsp_references()
+    -- TODO: if lsp supports reference provider and lsp is attached
+    -- [telescope.builtin.lsp_*]: server does not support referencesProvider
+    if #vim.lsp.get_active_clients({bufnr = 0}) > 0 then
+        builtin.lsp_references()
+    else
+        builtin.grep_string()
+    end
 end)
 
 -- -- find git, lists git pickers

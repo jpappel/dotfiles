@@ -30,5 +30,7 @@ lsp.set_preferences({
 --
 require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
+-- TODO: change bind for lsp.buf.code_actions()
+
 
 lsp.setup()

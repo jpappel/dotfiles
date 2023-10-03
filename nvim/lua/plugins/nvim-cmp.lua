@@ -2,6 +2,8 @@
 
 local Plugins = {}
 
+-- FIXME: plugin not loading correctly
+
 -- Autocompletion
 local cmp_plugin = {
     'hrsh7th/nvim-cmp',
@@ -25,8 +27,8 @@ table.insert(Plugins, cmp_plugin)
 
 table.insert(Plugins, {
       'aspeddro/cmp-pandoc.nvim',
-      enabled = false,
-      event = 'InsertEnter',
+      enabled = true,
+      -- event = 'InsertEnter',
       ft = {'markdown', 'pandoc', 'rmd'},
       dependencies = {
           'nvim-lua/plenary.nvim',
@@ -39,7 +41,7 @@ table.insert(Plugins, {
       }
 })
 
-function cmp_plugin.config()
+cmp_plugin.config = function()
   user.augroup = vim.api.nvim_create_augroup('compe_cmds', {clear = true})
   vim.api.nvim_create_user_command('UserCmpEnable', user.enable_cmd, {})
 
@@ -80,21 +82,22 @@ function cmp_plugin.config()
         zindex = 50,
       }
     },
-    -- formatting = {
-    --   fields = {'menu', 'abbr', 'kind'},
-    --   format = function(entry, item)
-    --     local menu_icon = {
-    --       nvim_lsp = 'λ',
-    --       luasnip = '⋗',
-    --       buffer = 'Ω',
-    --       path = '🖫',
-    --       nvim_lua = 'Π',
-    --     }
-    --
-    --     item.menu = menu_icon[entry.source.name]
-    --     return item
-    --   end,
-    -- },
+    formatting = {
+      fields = {'menu', 'abbr', 'kind'},
+      format = function(entry, item)
+        local menu = {
+          nvim_lsp = '[LSP]',
+          luasnip = '[Snip]',
+          buffer = '[Buffer]',
+          path = '[Path]',
+          nvim_lua = '[Lua]',
+          cmp_pandoc = '[Pandoc]'
+        }
+
+        item.menu = menu[entry.source.name]
+        return item
+      end,
+    },
     mapping = {
       ['<C-k>'] = cmp.mapping.scroll_docs(-5),
       ['<C-j>'] = cmp.mapping.scroll_docs(5),
