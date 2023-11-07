@@ -63,3 +63,7 @@ vim.opt.termguicolors = true
 
 -- tex syntax highlighting
 vim.g.tex_flavor = "latex"
+
+-- ripgrep
+vim.opt.grepprg = "rg --vimgrep"
+vim.opt.grepformat = "%f:%l:%c:%m"
