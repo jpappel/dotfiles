@@ -19,4 +19,10 @@ M.vnoremap = bind("v")
 M.xnoremap = bind("x")
 M.inoremap = bind("i")
 
+M.nnoremap("gf", function() vim.cmd([[:e <cfile>]]) end)
+M.nnoremap("<Leader>qf", function() vim.cmd(':cope') end)
+M.nnoremap("<leader>ef", function()
+    vim.cmd('Vexplore')
+end)
+
 return M

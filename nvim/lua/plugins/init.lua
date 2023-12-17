@@ -3,10 +3,6 @@ return {
     -- common dependacy
     "nvim-lua/plenary.nvim",
 
-    -- git
-    'tpope/vim-fugitive', -- close to native git command integrations
-
-
     -- completion
     -- TODO:config completion and setup binds
     'hrsh7th/nvim-cmp',
@@ -22,9 +18,6 @@ return {
         'kdheepak/cmp-latex-symbols',
         dependencies = { 'hrsh7th/nvim-cmp' }
     },
-
-
-
 
     {
         'numToStr/Comment.nvim', -- faster commentting
