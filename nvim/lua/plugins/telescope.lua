@@ -10,15 +10,27 @@ return {
         end,
         desc = "Search for files (respcting .gitignore)"
     },
-    {"<Leader>fb", function()
+    {"<leader>fb", function()
         require("telescope.builtin").buffers()
     end
     },
-    {"<Leader>gf", function()
+    {"<leader>gf", function()
         require("telescope.builtin").live_grep()
     end
     },
-    {"<Leader>fr", function()
+    {"<leader>fq", function()
+        require("telescope.builtin").quickfix()
+    end
+    },
+    {"<leader>fl", function()
+        require("telescope.builtin").loclist()
+    end
+    },
+    {"<leader>fd", function()
+        require("telescope.builtin").diagnostics()
+    end
+    },
+    {"<leader>fr", function()
         -- TODO: if lsp supports reference provider and lsp is attached
         -- [telescope.builtin.lsp_*]: server does not support referencesProvider
         if #vim.lsp.get_active_clients({bufnr = 0}) > 0 then

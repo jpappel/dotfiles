@@ -20,7 +20,16 @@ M.xnoremap = bind("x")
 M.inoremap = bind("i")
 
 M.nnoremap("gf", function() vim.cmd([[:e <cfile>]]) end)
-M.nnoremap("<Leader>qf", function() vim.cmd(':cope') end)
+M.nnoremap("<Leader>q", function() vim.cmd(':botright cope') end)
+M.nnoremap("<Leader>l", function()
+    local success, err_msg = pcall(function()
+        vim.cmd(':aboveleft lope')
+    end)
+    if not success then
+        err_msg = string.match(tostring(err_msg), "E%d+.*")
+        vim.api.nvim_err_writeln(err_msg)
+    end
+end)
 M.nnoremap("<leader>ef", function()
     vim.cmd('Vexplore')
 end)
