@@ -216,4 +216,74 @@ function user.insert_tab()
   )
 end
 
-return Plugins
+-- return Plugins
+
+return {
+    {
+        "L3MON4D3/LuaSnip",
+        version = "v2.*",
+        build = "make install_jsregexp"
+    },
+    -- completion sources
+    {
+        'hrsh7th/cmp-path',
+    },
+    {
+        'saadparwaiz1/cmp_luasnip'
+    },
+    { -- TODO: lazy load on filtetype
+        'hrsh7th/cmp-nvim-lua'
+    },
+    {
+        -- TODO: lazy load on lsp load
+        'hrsh7th/cmp-nvim-lsp',
+        dependencies= {
+            'neovim/nvim-lspconfig'
+        },
+    },
+    {
+        'hrsh7th/cmp-buffer',
+    },
+    {
+        'hrsh7th/nvim-cmp',
+        config = function()
+            local cmp = require('cmp')
+            cmp.setup({
+                snippet = {
+                    expand = function(args)
+                        require('luasnip').lsp_expand(args.body)
+                    end
+                },
+                sources = {
+                    { name = 'nvim_lsp', keyword_length = 3 },
+                    { name = 'luasnip', keyword_length = 2 },
+                    { name = 'path' },
+                    { name = 'nvim_lua' },
+                    { name = 'buffer', keyword_length = 3 }
+                    -- TODO: add more sources
+                },
+                window = {
+                    -- TODO: style cmp windows
+                    completion = cmp.config.window.bordered(),
+                    documentation = cmp.config.window.bordered()
+                },
+                mapping = cmp.mapping.preset.insert({
+                    ['<C-k>'] = cmp.mapping.scroll_docs(-5),
+                    ['<C-j>'] = cmp.mapping.scroll_docs(5),
+                    ['<TAB>'] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.confirm({select = true })
+                        else
+                            fallback()
+                        end
+                    end, {'i', 's'})
+                })
+            })
+        end
+    },
+
+    -- {
+    --     'kdheepak/cmp-latex-symbols',
+    --     dependencies = { 'hrsh7th/nvim-cmp' }
+    -- },
+}
