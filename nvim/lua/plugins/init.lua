@@ -19,8 +19,15 @@ return {
     },
 
     {
+        "j-hui/fidget.nvim",
+        config = function ()
+            require("fidget").setup({})
+        end
+    },
+
+    {
         'ap/vim-css-color',
-        ft = {'css'}
+        ft = {'css', 'scss', 'sass'}
     }
 
     -- cosmetic
