@@ -359,6 +359,7 @@ $if(math)$
 \newtheorem{case}{Case}
 \newtheorem*{case*}{Case}
 \newtheorem{lemma}{Lemma}
+\newcommand{\foo}{\textbf{foo}}
     $endif$
     $if(math.geometry)$
 \newcommand{\Line}{\overleftrightarrow}
@@ -380,11 +381,13 @@ $if(math)$
 }
         $endif$
     $endif$
-    $endfor$
     $if(math.complex)$
-\renewcommand{\Re}{\textrm{Re}}
-\renewcommand{\Im}{\textrm{Im}}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\conjugate}[1]{\overline{#1}}
+\newcommand{\modulus}[1]{\left|#1\right|}
     $endif$
+    $endfor$
 $endif$
 
 \begin{document}
