@@ -1,23 +1,31 @@
-local colorscheme = {
-    lazy = false,
-    priority = 1000
+return {
+    {
+        "catppuccin/nvim" ,
+        name = "catpuccin",
+        lazy = false,
+        priority = 1000,
+        enabled = true,
+        config = function()
+            vim.cmd[[colorscheme catppuccin-mocha]]
+        end
+    },
+    {
+        "mbrea-c/wal-colors.nvim",
+        enabled = false,
+        lazy = false,
+        priority = 1000,
+        config = function()
+            vim.cmd[[colorscheme mbc]]
+        end,
+    },
+    {
+        'folke/tokyonight.nvim',
+        name = 'tokyonight',
+        enabled = false,
+        lazy = false,
+        priority = 1000,
+        config = function()
+            vim.cmd[[colorscheme tokyonight-night]]
+        end
+    }
 }
-
-local catpuccin = {
-    "catppuccin/nvim" ,
-    name = "catpuccin",
-    config = function()
-        vim.cmd[[colorscheme catppuccin-mocha]]
-    end
-}
-
-local tokyonight = {
-    'folke/tokyonight.nvim',
-    name = 'tokyonight',
-    config = function()
-        vim.cmd[[colorscheme tokyonight-night]]
-    end
-}
-
--- combine default colorscheme settings with selected theme
-return vim.tbl_extend('force', colorscheme, catpuccin)
