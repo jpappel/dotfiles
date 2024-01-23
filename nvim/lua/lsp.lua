@@ -5,7 +5,8 @@ lsp.preset({})
 lsp.ensure_installed({
     'pylsp',
     'html',
-    'sqlls',
+    'clangd',
+    -- 'sqlls',
     'cssls',
     -- 'java_language_server',
     -- 'ltex',
