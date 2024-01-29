@@ -1,0 +1,58 @@
+set nocompatible
+
+syntax enable
+
+" file encoding
+set encoding=utf-8
+set fileencoding=utf-8
+
+set title
+
+set ruler
+set cursorline
+
+set backspace=indent,eol,start
+
+" tab settings
+set expandtab
+set tabstop=4
+set shiftwidth=4
+
+set autoindent
+set showmatch
+
+set autoread
+set nobackup
+
+" line numbers
+set nu
+set rnu
+
+" search
+set hlsearch
+set ignorecase
+set smartcase
+
+" bell
+set noerrorbells
+set visualbell
+
+" wildmenu
+set wildmenu
+set wildmode="list:full"
+
+set laststatus=2
+
+set termguicolors
+colo sorbet
+
+" netrw
+let g:netrw_liststyle=3
+
+let mapleader=" "
+
+" keybindings
+nnoremap gf :e <cfile>
+nnoremap ef :Lexplore
+nnoremap <Leader>q :botright cope
+nnoremap <Leader>l :aboveleft lope
