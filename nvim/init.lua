@@ -36,6 +36,10 @@ vim.opt.showmatch = true
 vim.opt.showmode = false
 vim.opt.mouse = "anv"
 
+--change mouse menu
+vim.api.nvim_command([[aunmenu PopUp.How-to\ disable\ mouse]])
+vim.api.nvim_command('aunmenu PopUp.-1-')
+
 -- Status line
 vim.opt.laststatus = 3
 
