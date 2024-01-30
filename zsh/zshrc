@@ -35,9 +35,9 @@ RPROMPT='%B${vim_mode}%b%(?..[%?])'
 # setopt completealiases
 
 [ -f "$HOME/.profile" ] && . "$HOME/.profile"
-[ -f "$HOME/.config/zsh/zshenv" ] . "$HOME/.config/zsh/zshenv"
-[ -f "$HOME/.config/zsh/zshalias" ] . "$HOME/.config/zsh/zshalias"
-[ -f "$HOME/.config/zsh/zshcomp"] . "$HOME/.config/zsh/zshcomp"
+[ -f "$HOME/.config/zsh/zshenv" ] && . "$HOME/.config/zsh/zshenv"
+[ -f "$HOME/.config/zsh/zshalias" ] && . "$HOME/.config/zsh/zshalias"
+[ -f "$HOME/.config/zsh/zshcomp" ] && . "$HOME/.config/zsh/zshcomp"
 
 #wal colorscheme
 [ -f "$HOME/.cache/wal/colors-tty.sh" ] && source ~/.cache/wal/colors-tty.sh ; true
