@@ -39,12 +39,12 @@ set visualbell
 
 " wildmenu
 set wildmenu
-set wildmode="list:full"
+set wildmode=full
 
 set laststatus=2
 
 set termguicolors
-colo sorbet
+colo slate
 
 " netrw
 let g:netrw_liststyle=3
