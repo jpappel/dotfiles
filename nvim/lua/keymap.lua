@@ -31,7 +31,7 @@ M.nnoremap("<Leader>l", function()
     end
 end)
 M.nnoremap("<leader>ef", function()
-    vim.cmd('Vexplore')
+    vim.cmd('Lexplore')
 end)
 
 return M
