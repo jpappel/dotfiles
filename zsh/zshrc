@@ -1,11 +1,11 @@
 # The following lines were added by compinstall
 
-zstyle ':completion:*' completer _complete _ignored _approximate
+zstyle ':completion:*' completer _complete _expand_alias _ignored _approximate
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]} m:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|[._-]=* r:|=*'
 zstyle ':completion:*' max-errors 3
 zstyle ':completion:*' prompt '%e'
 zstyle ':completion:*' squeeze-slashes true
-zstyle :compinstall filename '/home/goose/.zshrc'
+zstyle :compinstall filename "$HOME/.zshrc"
 
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
@@ -32,10 +32,12 @@ setopt PROMPT_SUBST
 PROMPT='%F{green}%n%f%F{cyan}@%f%F{blue}%m%#%f%F{magenta}%~>%f'
 RPROMPT='%B${vim_mode}%b%(?..[%?])'
 
+# setopt completealiases
 
-source ~/.profile
-source ~/.config/zsh/zshenv
-source ~/.config/zsh/zshalias
+[ -f "$HOME/.profile" ] && . "$HOME/.profile"
+[ -f "$HOME/.config/zsh/zshenv" ] . "$HOME/.config/zsh/zshenv"
+[ -f "$HOME/.config/zsh/zshalias" ] . "$HOME/.config/zsh/zshalias"
+[ -f "$HOME/.config/zsh/zshcomp"] . "$HOME/.config/zsh/zshcomp"
 
 #wal colorscheme
 [ -f "$HOME/.cache/wal/colors-tty.sh" ] && source ~/.cache/wal/colors-tty.sh ; true
