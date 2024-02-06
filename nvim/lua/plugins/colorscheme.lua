@@ -4,14 +4,12 @@ local colorschemes = {
         name = "catpuccin",
         lazy = false,
         priority = 1000,
-        enabled = false,
         config = function()
             vim.cmd[[colorscheme catppuccin-mocha]]
         end
     },
     wal = {
         "mbrea-c/wal-colors.nvim",
-        enabled = false,
         lazy = false,
         priority = 1000,
         config = function()
@@ -21,7 +19,6 @@ local colorschemes = {
     tokyonight = {
         'folke/tokyonight.nvim',
         name = 'tokyonight',
-        enabled = false,
         lazy = false,
         priority = 1000,
         config = function()
@@ -30,7 +27,6 @@ local colorschemes = {
     },
     everforest = {
         'sainnhe/everforest',
-        enabled = true,
         lazy = false,
         priority = 1000,
         config = function()
