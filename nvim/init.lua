@@ -3,6 +3,7 @@
 -- ====================
 
 HOME = os.getenv("HOME")
+HOSTNAME = vim.loop.os_gethostname()
 
 -- bootstrap lazynvim if not installed
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
