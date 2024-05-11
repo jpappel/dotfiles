@@ -68,11 +68,12 @@ cmp_plugin.config = function()
       end,
     },
     sources = {
-      {name = 'path'},
-      {name = 'nvim_lsp', keyword_length = 3},
-      {name = 'buffer', keyword_length = 3},
-      {name = 'luasnip', keyword_length = 2},
-      {name = 'cmp_pandoc' },
+      { name = 'path'},
+      { name = 'nvim_lsp'},
+      { name = 'buffer', keyword_length = 4},
+      { name = 'luasnip'},
+      { name = 'cmp_pandoc' },
+      { name = 'emoji' },
     },
     window = {
       documentation = {
@@ -91,7 +92,8 @@ cmp_plugin.config = function()
           buffer = '[Buffer]',
           path = '[Path]',
           nvim_lua = '[Lua]',
-          cmp_pandoc = '[Pandoc]'
+          cmp_pandoc = '[Pandoc]',
+          emoiji = '[Emoji]'
         }
 
         item.menu = menu[entry.source.name]
@@ -255,12 +257,12 @@ return {
                     end
                 },
                 sources = {
-                    { name = 'nvim_lsp', keyword_length = 3 },
-                    { name = 'luasnip', keyword_length = 2 },
+                    { name = 'nvim_lsp'},
+                    { name = 'luasnip'},
                     { name = 'path' },
                     { name = 'nvim_lua' },
-                    { name = 'buffer', keyword_length = 3 }
-                    -- TODO: add more sources
+                    { name = 'buffer', keyword_length = 4 },
+                    { name = 'emoji' }
                 },
                 window = {
                     -- TODO: style cmp windows

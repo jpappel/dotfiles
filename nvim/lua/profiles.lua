@@ -14,6 +14,8 @@ local getDefaultmetatable = {
 }
 
 -- Create a table for each machine with a default value
+-- @param default the default value for each profile
+-- @return a table with each machine as a key and a default
 -- current machines: nest, Goose.local
 M.createProfiles = function(default)
     local profiles = {}
