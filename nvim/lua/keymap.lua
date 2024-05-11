@@ -30,8 +30,13 @@ M.nnoremap("<Leader>l", function()
         vim.api.nvim_err_writeln(err_msg)
     end
 end)
+
 M.nnoremap("<leader>ef", function()
     vim.cmd('Lexplore')
+end)
+
+M.nnoremap("<Leader>k", function()
+    vim.cmd("make")
 end)
 
 return M
