@@ -33,7 +33,7 @@ return {
     {"<leader>fr", function()
         -- TODO: if lsp supports reference provider and lsp is attached
         -- [telescope.builtin.lsp_*]: server does not support referencesProvider
-        if #vim.lsp.get_active_clients({bufnr = 0}) > 0 then
+        if #vim.lsp.get_clients({bufnr = 0}) > 0 then
             require("telescope.builtin").lsp_references()
         else
             require("telescope.builtin").grep_string()
