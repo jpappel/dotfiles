@@ -1,5 +1,5 @@
 return {
-    'nvim-telescope/telescope.nvim', tag = '0.1.2',   -- fuzzy finder
+    'nvim-telescope/telescope.nvim',  -- fuzzy finder
     dependencies = {
         'nvim-lua/plenary.nvim',
         'nvim-tree/nvim-web-devicons'
