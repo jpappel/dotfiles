@@ -1,8 +1,7 @@
 return {
     'nvim-lualine/lualine.nvim', -- lualine
     dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
-    config = function()
-        require('lualine').setup({
+    opts = {
             options = {
                 theme = 'auto',
                 globalstatus = true,
@@ -31,6 +30,5 @@ return {
             --     lualine_y = {},
             --     lualine_z = {}
             -- },
-        })
-    end
+        },
 }
