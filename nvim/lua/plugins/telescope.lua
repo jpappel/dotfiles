@@ -14,7 +14,7 @@ return {
         require("telescope.builtin").buffers()
     end
     },
-    {"<leader>gf", function()
+    {"<leader>fg", function()
         require("telescope.builtin").live_grep()
     end
     },

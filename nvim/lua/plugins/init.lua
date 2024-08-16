@@ -6,29 +6,25 @@ return {
 
     {
         'numToStr/Comment.nvim', -- faster commentting
-        lazy = false,
+        event = 'BufEnter',
         opts = {
             mappings = {
                 basic = true,
                 extra = false
             }
         },
-        -- config = function()
-        --     require('Comment').setup()
-        -- end
     },
 
     {
         "j-hui/fidget.nvim",
-        config = function ()
-            require("fidget").setup({})
-        end
+        event = { 'LspAttach' },
+        opts = {}
     },
 
     {
         'ap/vim-css-color',
-        ft = {'css', 'scss', 'sass'}
-    }
+        ft = { 'css', 'scss', 'sass' }
+    },
 
     -- cosmetic
     -- 'kyazdani42/nvim-web-devicons',

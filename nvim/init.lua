@@ -17,7 +17,9 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   })
 end
+
 vim.opt.rtp:prepend(lazypath)
+-- TODO: include local plugins
 
 -- leader
 vim.g.mapleader = ' '
@@ -25,7 +27,7 @@ vim.g.maplocalleader = ' '
 
 require("lazy").setup('plugins')
 require('keymap')
-require('lsp')
+
 
 -- General Config
 vim.opt.number = true
