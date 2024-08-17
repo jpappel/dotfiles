@@ -13,7 +13,11 @@ return {
                     follow = false
                 }
                 if trouble.is_open(opts) then
-                    trouble.close(opts)
+                    if vim.o.ft == "trouble" then
+                        trouble.close(opts)
+                    else
+                        trouble.focus()
+                    end
                 else
                     trouble.open(opts)
                 end
@@ -30,11 +34,14 @@ return {
                     follow = false,
                     filter = { buf = 0 }
                 }
-                if not trouble.is_open(opts) then
-                    trouble.open(opts)
-                    trouble.focus(opts)
+                if trouble.is_open(opts) then
+                    if vim.o.ft == "trouble" then
+                        trouble.close(opts)
+                    else
+                        trouble.focus()
+                    end
                 else
-                    trouble.close(opts)
+                    trouble.open(opts)
                 end
             end,
             desc = "Buffer Diagnostics (Trouble)",

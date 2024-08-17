@@ -35,6 +35,7 @@ local colorschemes = {
                 transparent_background_level = 2
             })
             vim.cmd[[highlight! link TroubleNormal Normal]]
+            vim.cmd[[highlight! link TroubleNormalNC Normal]]
             vim.cmd[[colorscheme everforest"]]
         end
     },
