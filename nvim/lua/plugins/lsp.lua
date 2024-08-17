@@ -23,6 +23,14 @@ local lspconfig = {
             desc = "Rename symbol"
         },
         {
+            '<C-f>',
+            function()
+                vim.lsp.buf.format()
+            end,
+            mode = {'n', 'v'},
+            desc = "Format code"
+        },
+        {
             '<leader>la',
             function ()
                 vim.lsp.buf.code_action()

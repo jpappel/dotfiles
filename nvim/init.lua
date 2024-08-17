@@ -43,6 +43,9 @@ vim.opt.mouse = "anv"
 vim.api.nvim_command([[aunmenu PopUp.How-to\ disable\ mouse]])
 vim.api.nvim_command('aunmenu PopUp.-1-')
 
+-- Sign column
+vim.opt.signcolumn = "yes"
+
 -- Status line
 vim.opt.laststatus = 3
 
