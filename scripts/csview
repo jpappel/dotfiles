@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+if [ "$#" -eq 0 ] || [ "$1" = "-" ]; then
+    column -ts, | less -S
+else
+    column -ts, "$1" | less -S
+fi

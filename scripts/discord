@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+DOWNLOAD_URL="https://discord.com/api/download?platform=linux&format=tar.gz" 
+INSTALL_DIR="$HOME/src/Discord"
+
+update(){
+    pidof Discord > /dev/null 2>&1 && pkill Discord
+    curl -L "$DOWNLOAD_URL" > /tmp/discord.tar.gz &&
+        rm -rf "$INSTALL_DIR" &&
+        tar -xzf /tmp/discord.tar.gz -C "$HOME/src"
+}
+
+
+# check for updates
+if [ -n "$1" ]; then
+    case "$1" in
+        "update")
+            echo "Updating Discord"
+            update
+            ;;
+        *)
+            echo "Unknown argument. Usage $0 [update]"
+            exit 1
+            ;;
+    esac
+else
+    # install if not installed
+    [ -x "$INSTALL_DIR/Discord" ] || {
+        echo "Installing Discord"
+        update
+    }
+
+    # start discord
+    "$INSTALL_DIR/Discord" > /dev/null 2>&1 & disown
+fi
