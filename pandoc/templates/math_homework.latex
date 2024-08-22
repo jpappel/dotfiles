@@ -387,6 +387,7 @@ $if(math)$
 \newcommand{\conjugate}[1]{\overline{#1}}
 \newcommand{\modulus}[1]{\left|#1\right|}
 \DeclareMathOperator\Arg{Arg}
+\DeclareMathOperator\Log{Log}
     $endif$
     $endfor$
 $endif$

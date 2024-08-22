@@ -472,6 +472,8 @@ $if(proof)$
 \newtheorem{thrm}{Theorem}
 $endif$
 
+\usepackage{ulem}
+
 %figure refrence
 \newcommand{\fig}[1]{Fig.\ref{fig:#1}}
 
