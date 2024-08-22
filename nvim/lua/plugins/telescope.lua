@@ -4,6 +4,7 @@ return {
         'nvim-lua/plenary.nvim',
         'nvim-tree/nvim-web-devicons'
     },
+    cmd = 'Telescope',
     keys = {
         {"<leader>ff", function()
             require("telescope.builtin").find_files()
