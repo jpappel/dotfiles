@@ -67,7 +67,15 @@ return {
         },
         {
             "<leader>dq",
-            "<cmd>Trouble qflist toggle<cr>",
+            function()
+                require("trouble").toggle({
+                    mode = "qflist",
+                    auto_close = true,
+                    auto_preview = false,
+                    focus = true,
+                    follow = false,
+                })
+            end,
             desc = "Quickfix List (Trouble)",
         },
     },
