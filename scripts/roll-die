@@ -6,17 +6,17 @@ from pathlib import Path
 import re
 
 
-def roll_die(num_dice: int, dice_type: int, modifier: int) -> [int]:
-    rolls = []
-    for i in range(num_dice):
+def roll_die(num_dice: int, dice_type: int, modifier: int) -> list[int]:
+    rolls: list[int] = []
+    for _ in range(num_dice):
         rolls.append(random.randint(1, dice_type) + modifier)
 
     return rolls
 
 
-def parse_dice_notation(dice_notation) -> (int, int, int):
+def parse_dice_notation(dice_notation: str) -> tuple[int, int, int]:
     # Define the regular expression pattern
-    pattern = re.compile(r'(\d+)d(\d+)([+-]\d+)?')
+    pattern = re.compile(r"(\d+)d(\d+)([+-]\d+)?")
 
     # Search the pattern in the dice notation string
     match = pattern.match(dice_notation)
@@ -35,13 +35,13 @@ def parse_dice_notation(dice_notation) -> (int, int, int):
     return num_dice, dice_type, modifier
 
 
-def summary(rolls: [int]) -> None:
+def summary(rolls: list[int]) -> None:
     print(rolls)
-    print(f'Min: {min(rolls)}')
-    print(f'Max: {max(rolls)}')
+    print(f"Min: {min(rolls)}")
+    print(f"Max: {max(rolls)}")
     if len(rolls) > 1:
-        print(f'Total: {sum(rolls)}')
-        print(f'Avg: {sum(rolls)/len(rolls):.2f}')
+        print(f"Total: {sum(rolls)}")
+        print(f"Avg: {sum(rolls)/len(rolls):.2f}")
 
 
 def main():
@@ -61,6 +61,7 @@ def main():
         num_die, die_type, modifier = parse_dice_notation(dice_notation)
     except ValueError as e:
         print(e)
+        sys.exit(1)
 
     rolls = roll_die(num_die, die_type, modifier)
     summary(rolls)

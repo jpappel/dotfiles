@@ -11,6 +11,7 @@ end
 vim.keymap.set('n', 'gf', function() cmd_pcall(':e <cfile>') end, {noremap = true})
 vim.keymap.set('n', "<Leader>q", function() vim.cmd(':botright cope') end)
 vim.keymap.set('n', "<Leader>l", function() cmd_pcall(':aboveleft lope') end)
+vim.keymap.set('n', "<Leader>dk", function () vim.diagnostic.open_float() end)
 
 vim.keymap.set('n',"<Leader>k", function() vim.cmd("make") end)
 
