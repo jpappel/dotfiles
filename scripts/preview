@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+path="$1"
+lines="$2"
+
+# TODO: if lines is undefined set to 40
+# TODO: truncate long output to lines
+
+[ ! -e "$path" ] && { echo "$path not found" ; exit 1; }
+
+filetype=$(file -b "$path")
+
+if grep -q "text" <<< "$filetype"; then
+    filetype="text"
+elif grep -q "archive" <<< "$filetpye"; then
+    filetype="archive"
+elif grep -q "ISO" <<< "$filetype" ; then
+    filetype="iso"
+fi
+
+case $filetype in
+    "directory")
+        fd . "$path"
+        ;;
+    "text")
+        bat -p -r ":$lines" --color=always "$path"
+        ;;
+    "archive")
+        echo "archive preview not currently supported"
+        file -b "$path"
+        ;;
+    "iso")
+        isoinfo -l -i "$path" | head -n "$lines"
+        ;;
+    *)
+        file -b "$path"
+        ;;
+esac

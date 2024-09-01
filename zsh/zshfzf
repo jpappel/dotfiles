@@ -1,0 +1,11 @@
+source <(fzf --zsh)
+
+fzf_widget() {
+  BUFFER=$(fd | fzf --multi --scheme=path\
+      --preview 'preview {} $FZF_PREVIEW_LINES' --preview-label='File Preview')
+  CURSOR=$#BUFFER
+  zle redisplay
+}
+zle -N fzf_widget
+
+bindkey '^f' fzf_widget
