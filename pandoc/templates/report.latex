@@ -38,9 +38,7 @@ $endif$
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
 \usepackage{fancyhdr}
-\renewcommand{\headrulewidth}{1pt}
-\pagestyle{fancy}
-\fancyhead[C]{$title$}
+\pagestyle{headings}
 $if(fontfamily)$
 $else$
 $-- Set default font before Beamer theme so the theme can override it
@@ -164,7 +162,7 @@ $if(verbatim-in-note)$
 \usepackage{fancyvrb}
 $endif$
 \usepackage{xcolor}
-\usepackage[left=1.25in,right=1.25in,top=1in,bottom=1in]{geometry}
+\usepackage[margin=1in]{geometry}
 $if(listings)$
 \usepackage{listings}
 \newcommand{\passthrough}[1]{#1}
