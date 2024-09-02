@@ -1,10 +1,16 @@
 source <(fzf --zsh)
 
 fzf_widget() {
-  BUFFER=$(fd | fzf --multi --scheme=path\
-      --preview 'preview {} $FZF_PREVIEW_LINES' --preview-label='File Preview')
-  CURSOR=$#BUFFER
-  zle redisplay
+    local selected
+    selected=$(fd | fzf --multi --scheme=path\
+        --preview 'preview {} $FZF_PREVIEW_LINES' --preview-label='File Preview' |\
+        sed 's/^\(.*\)$/"\1"/' | tr '\n' ' ')
+
+    if [[ -n $selected ]]; then
+        BUFFER="$BUFFER$selected"
+        CURSOR=$#BUFFER
+    fi
+    zle redisplay
 }
 zle -N fzf_widget
 

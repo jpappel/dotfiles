@@ -26,7 +26,7 @@ bindkey -v
 
 # Plugins
 source ~/.config/zsh/zshvimodes
-eval "$(fzf --zsh)"
+source ~/.config/zsh/zshfzf
 
 # Prompt
 setopt PROMPT_SUBST
