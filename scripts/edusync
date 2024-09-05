@@ -1,0 +1,131 @@
+#!/usr/bin/env bash
+
+year="$(date '+%Y')"
+usage="Usage: $0 <command> [-r <remote>] [-y <year>]"
+
+print_help() {
+    cat << EOF
+$usage
+
+Description:
+  This script synchronizes files using rsync
+
+Options:
+  -r <remote>    Specify the target machine (nest, lnest, laptop, roost).
+  -y <year>      Specify the year for data synchronization.
+  -h             Display this help message and exit.
+
+commands:
+  push           Push data to the specified target.
+  pull           Pull data from the specified target.
+
+Examples:
+  $0 push -r roost -y 2023     # Push data to the 'roost' target for the year 2023.
+  $0 pull -r nest              # Pull data from the 'nest' target for the current year ($year).
+EOF
+}
+
+check_requirements(){
+     if ! command -v rsync > /dev/null; then
+        echo "Missing rsync, exiting"
+        exit 1
+    fi
+}
+
+find_local(){
+    case "$(uname)" in
+        "Linux")
+            local_dir="$HOME/doc/edu"
+            ;;
+        "Darwin")
+            local_dir="$HOME/Documents"
+            ;;
+        *)
+            exit 1
+    esac
+    echo "$local_dir"
+}
+
+find_remote(){
+    case "$1" in
+        "nest"|"lnest")
+            echo "$1:doc/edu"
+            ;;
+        "laptop"|"macbook")
+            echo "laptop:Documents"
+            ;;
+        "roost")
+            echo "eduroost:doc"
+            ;;
+        *)
+            exit 1
+    esac
+}
+
+push_data(){
+    local lroot="$1"
+    rsync -aiuvzCP --exclude-from="$lroot/.syncignore" "$lroot/$year" "$remote_root"
+}
+
+pull_data(){
+    local lroot="$1"
+    rsync -aiuvzCP "$remote_root/$year" "$lroot"
+}
+
+check_requirements
+
+# set command to first argument
+command="$1"
+[ -z "$command" ] && {
+    echo "missing command"
+    echo "$usage"
+    exit 1
+}
+shift
+
+# parse options
+while getopts ":r:y:h" opt; do
+    case $opt in
+        r) remote="$OPTARG";;
+        y) year="$OPTARG";;
+        h) print_help; exit 0 ;;
+        \?)
+            echo "Invalid options: -$OPTARG" >&2
+            exit 1
+            ;;
+        :)
+            echo "Option -$OPTARG requires an argument" >&2
+            exit 1
+            ;;
+    esac
+done
+
+
+# check for valid remote
+[ -z "$remote" ] && {
+    echo "$usage" >&2
+    exit 1
+}
+
+# set remote root
+remote_root="$(find_remote "$remote")"
+[ -z "$remote_root" ] && {
+    echo "Unrecognized remote: $remote"
+    exit 1
+}
+
+local_root="$(find_local)"
+[ -z "$local_root" ] && {
+    echo "Machine not recognized, exitting"
+    exit 1
+}
+
+# execute commands
+case "$command" in 
+    "push") push_data "$local_root";;
+    "pull") pull_data "$local_root";;
+    "help") print_help ;;
+    *)
+        echo "unrecognized command: $command"
+        exit 1
+esac
