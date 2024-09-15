@@ -16,6 +16,8 @@ elif grep -q "archive" <<< "$filetpye"; then
     filetype="archive"
 elif grep -q "ISO" <<< "$filetype" ; then
     filetype="iso"
+elif grep -q "PDF" <<< "$filetype"; then
+    filetype="pdf"
 fi
 
 case $filetype in
@@ -31,6 +33,15 @@ case $filetype in
         ;;
     "iso")
         isoinfo -l -i "$path" | head -n "$lines"
+        ;;
+    "pdf")
+        info=$(pdfinfo "$path")
+        remaining_lines=$(echo "$lines - $(echo $info | wc -l) -1" | bc)
+        echo "$info"
+        echo "--------------"
+        if [ "$remaining_lines" -gt 0 ]; then
+            pdftotext -nodiag -nopgbrk "$path" - | head -n "$remaining_lines"
+        fi
         ;;
     *)
         file -b "$path"
