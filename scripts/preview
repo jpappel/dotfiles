@@ -3,10 +3,8 @@
 path="$1"
 lines="$2"
 
-# TODO: if lines is undefined set to 40
-# TODO: truncate long output to lines
-
 [ ! -e "$path" ] && { echo "$path not found" ; exit 1; }
+[ -z "$lines" ] && lines=40
 
 filetype=$(file -b "$path")
 
