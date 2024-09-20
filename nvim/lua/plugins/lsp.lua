@@ -98,35 +98,38 @@ local mason_lspconfig = {
         handlers = {
             function(server_name)
                 require('lspconfig')[server_name].setup({})
-            end
-        },
-        ["lua_ls"] = function()
-            require('lspconfig').lua_ls.setup({
-                settings = {
-                    Lua = {
-                        diagnostics = {
-                            globals = { "vim" }
+            end,
+            ["lua_ls"] = function()
+                require('lspconfig').lua_ls.setup({
+                    settings = {
+                        Lua = {
+                            diagnostics = {
+                                globals = { "vim" }
+                            }
                         }
                     }
-                }
-            })
-        end,
-        ["basedpyright"] = function()
-            require('lspconfig').setup({
-                settings = {
-                    pyright = {
-                        -- defer to ruff for import oranization
-                        disableOrganizeImports = true,
-                    },
-                    python = {
-                        analysis = {
-                            -- Ignore all files for analysis to exclusively use Ruff for linting
-                            ignore = { '*' },
+                })
+            end,
+            ["basedpyright"] = function()
+                require('lspconfig').basedpyright.setup({
+                    settings = {
+                        basedpyright = {
+                            -- defer to ruff for import oranization
+                            disableOrganizeImports = true,
+                            analysis = {
+                                typeCheckingMode = "standard"
+                            }
+                        },
+                        python = {
+                            analysis = {
+                                -- Ignore all files for analysis to exclusively use Ruff for linting
+                                ignore = { '*' },
+                            },
                         },
                     },
-                },
-            })
-        end
+                })
+            end
+        },
     }
 }
 
