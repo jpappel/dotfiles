@@ -2,7 +2,16 @@ source <(fzf --zsh)
 
 fzf_widget() {
     local selected
-    selected=$(fd | fzf --multi --scheme=path\
+    local current_word
+
+    if [[ "${BUFFER: -1}" == " " ]]; then
+        current_word=""
+    else
+        current_word=$(echo "$BUFFER" | awk '{print $NF}')
+        BUFFER=${BUFFER%$current_word}
+    fi
+
+    selected=$(fd | fzf --multi --query="$current_word" --scheme=path\
         --preview 'preview {} $FZF_PREVIEW_LINES' --preview-label='File Preview' |\
         sed 's/^\(.*\)$/"\1"/' | tr '\n' ' ')
 
