@@ -92,7 +92,7 @@ local mason_lspconfig = {
             "gopls",
             "html",
             "ruff",
-            "tsserver"
+            "ts_ls"
 
         },
         handlers = {
@@ -108,6 +108,13 @@ local mason_lspconfig = {
                             }
                         }
                     }
+                })
+            end,
+            ["cssls"] = function()
+                local capabilities = vim.lsp.protocol.make_client_capabilities()
+                capabilities.textDocument.completion.completionItem.snippetSupport = true
+                require('lspconfig').cssls.setup({
+                    capabilities = capabilities,
                 })
             end,
             ["basedpyright"] = function()
