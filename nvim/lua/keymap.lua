@@ -20,7 +20,14 @@ local function send_to_qf(lines, line_nums)
 end
 
 vim.keymap.set('n', 'gf', function() cmd_pcall(':e <cfile>') end, { noremap = true })
-vim.keymap.set('n', "<Leader>q", function() vim.cmd('botright cope') end)
+vim.keymap.set('n', "<Leader>q", function()
+        if vim.o.ft == "qf" then
+            vim.cmd('ccl')
+        else
+            vim.cmd('botright cope')
+        end
+    end,
+    { noremap = true, desc = "Toggle bottom quickfix window" })
 vim.keymap.set('n', "<Leader>l", function() cmd_pcall(':aboveleft lope') end)
 vim.keymap.set('n', "<Leader>dk", function() vim.diagnostic.open_float() end)
 vim.keymap.set('n', "[q", "<cmd>cprev<cr>", { noremap = true })
@@ -71,7 +78,7 @@ local function vert_shift_selection(amount)
 
     -- shift lines
     if amount < 0 then
-        vim.cmd("'<,'>mo '<" .. amount-1)
+        vim.cmd("'<,'>mo '<" .. amount - 1)
     elseif amount > 0 then
         vim.cmd("'<,'>mo '>+" .. amount)
     end
