@@ -47,7 +47,7 @@ local lspconfig = {
             desc = "Format code"
         },
         {
-            '<leader>la',
+            '<leader>a',
             function()
                 vim.lsp.buf.code_action()
             end,
