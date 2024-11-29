@@ -1,11 +1,11 @@
 local colorschemes = {
     catppuccin = {
-        "catppuccin/nvim" ,
+        "catppuccin/nvim",
         name = "catpuccin",
         lazy = false,
         priority = 1000,
         config = function()
-            vim.cmd[[colorscheme catppuccin-mocha]]
+            vim.cmd [[colorscheme catppuccin-mocha]]
         end
     },
     wal = {
@@ -13,7 +13,7 @@ local colorschemes = {
         lazy = false,
         priority = 1000,
         config = function()
-            vim.cmd[[colorscheme mbc]]
+            vim.cmd [[colorscheme mbc]]
         end,
     },
     tokyonight = {
@@ -22,38 +22,51 @@ local colorschemes = {
         lazy = false,
         priority = 1000,
         config = function()
-            vim.cmd[[colorscheme tokyonight-night]]
+            vim.cmd [[colorscheme tokyonight-night]]
         end
     },
     everforest_lua = {
         'neanias/everforest-nvim',
         lazy = false,
         priority = 1000,
-        config = function ()
+        config = function()
             require("everforest").setup({
-                background = "medium",
-                transparent_background_level = 2
+                background = "hard",
+                transparent_background_level = 0
             })
-            vim.cmd[[highlight! link TroubleNormal Normal]]
-            vim.cmd[[highlight! link TroubleNormalNC Normal]]
-            vim.cmd[[colorscheme everforest"]]
+            vim.cmd [[highlight! link TroubleNormal Normal]]
+            vim.cmd [[highlight! link TroubleNormalNC Normal]]
+            vim.cmd [[colorscheme everforest"]]
         end
     },
-    everforest = {
-        'sainnhe/everforest',
+    evergarden = {
+        'comfysage/evergarden',
         lazy = false,
         priority = 1000,
         config = function()
-            vim.g.everforest_background = 'hard'
-            vim.g.everforest_enable_italic = 1
-            vim.g.everforest_transparent_background = 2
-            vim.cmd[[colorscheme everforest]]
+            require('evergarden').setup({
+                transparent_background = false,
+                contrast_dark = 'hard',
+                style = {
+                    tabline = { reverse = true, color = 'green' },
+                    search = { reverse = true, inc_reverse = true },
+                }
+            })
+            vim.cmd("colorscheme evergarden")
+        end
+    },
+    miasma = {
+        "xero/miasma.nvim",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            vim.cmd("colorscheme miasma")
         end,
     }
 }
 
 local colorsProfiles = require("profiles").createProfiles(colorschemes.catppuccin)
 
-colorsProfiles["nest"] = colorschemes.everforest_lua
+colorsProfiles["nest"] = colorschemes.evergarden
 
 return colorsProfiles[HOSTNAME]

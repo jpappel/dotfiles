@@ -99,7 +99,7 @@ vim.keymap.set('v', "K", function()
     vert_shift_selection(-1)
 end, { noremap = true, desc = "shift visual selection up" })
 
-vim.keymap.set('n', "<Leader>k", function() vim.cmd("make") end)
+vim.keymap.set('n', "<Leader>k", "<cmd>make<cr>")
 
 vim.keymap.set('t', "<ESC><ESC>", "<c-\\><c-n>")
 return M
