@@ -1,9 +1,5 @@
 return {
     {
-        'habamax/vim-godot',
-        ft = 'gdscript'
-    },
-    {
         'vim-pandoc/vim-pandoc',
         enabled = false,
         ft = { "markdown", "pandoc" },
