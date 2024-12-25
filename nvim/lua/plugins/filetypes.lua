@@ -16,6 +16,10 @@ return {
         lazy = true
     },
     {
+        'ap/vim-css-color',
+        ft = { 'css', 'scss', 'sass' }
+    },
+    {
         'kristijanhusak/vim-dadbod-completion',
         ft = { 'sql', 'mysql', 'plsql' },
         lazy = true

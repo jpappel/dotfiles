@@ -16,7 +16,7 @@ return {
                     if vim.o.ft == "trouble" then
                         trouble.close(opts)
                     else
-                        trouble.focus()
+                        trouble.focus("diagnostics")
                     end
                 else
                     trouble.open(opts)

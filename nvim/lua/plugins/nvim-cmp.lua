@@ -95,7 +95,6 @@ local cmp_pandoc = {
 }
 
 local cmp_lsp = {
-    -- TODO: lazy load on lsp load
     'hrsh7th/cmp-nvim-lsp',
     event = 'LspAttach',
     dependencies = {
@@ -173,7 +172,6 @@ local cmp = {
                 { name = 'luasnip' },
                 { name = 'nvim_lsp' },
                 { name = 'nvim_lua' },
-                { name = 'luansip' },
                 { name = 'buffer' },
                 { name = 'path' }
             }
@@ -181,6 +179,7 @@ local cmp = {
         cmp.setup.filetype({ "sql" }, {
             sources = {
                 { name = 'vim-dadbod-completion' },
+                { name = 'nvim_lsp' },
                 { name = 'buffer' }
             }
         })
@@ -197,9 +196,4 @@ return {
     cmp_buffer,
     -- cmp_pandoc,
     cmp,
-
-    -- {
-    --     'kdheepak/cmp-latex-symbols',
-    --     dependencies = { 'hrsh7th/nvim-cmp' }
-    -- },
 }
