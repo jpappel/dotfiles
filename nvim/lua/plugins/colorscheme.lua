@@ -5,7 +5,7 @@ local colorschemes = {
         lazy = false,
         priority = 1000,
         config = function()
-            vim.cmd [[colorscheme catppuccin-mocha]]
+            vim.cmd.colorscheme "catppuccin-mocha"
         end
     },
     wal = {
@@ -13,7 +13,7 @@ local colorschemes = {
         lazy = false,
         priority = 1000,
         config = function()
-            vim.cmd [[colorscheme mbc]]
+            vim.cmd.colorscheme "mbc"
         end,
     },
     tokyonight = {
@@ -22,7 +22,7 @@ local colorschemes = {
         lazy = false,
         priority = 1000,
         config = function()
-            vim.cmd [[colorscheme tokyonight-night]]
+            vim.cmd.colorscheme "tokyonight-night"
         end
     },
     everforest_lua = {
@@ -34,9 +34,9 @@ local colorschemes = {
                 background = "hard",
                 transparent_background_level = 0
             })
-            vim.cmd [[highlight! link TroubleNormal Normal]]
-            vim.cmd [[highlight! link TroubleNormalNC Normal]]
-            vim.cmd [[colorscheme everforest"]]
+            vim.cmd "highlight! link TroubleNormal Normal"
+            vim.cmd "highlight! link TroubleNormalNC Normal"
+            vim.cmd.colorscheme "everforest"
         end
     },
     evergarden = {
@@ -52,21 +52,20 @@ local colorschemes = {
                     search = { reverse = true, inc_reverse = true },
                 }
             })
-            vim.cmd("colorscheme evergarden")
+            vim.cmd.colorscheme "colo evergarden"
         end
     },
-    miasma = {
-        "xero/miasma.nvim",
-        lazy = false,
+    darkearth = {
+        "ptdewey/darkearth-nvim",
         priority = 1000,
         config = function()
-            vim.cmd("colorscheme miasma")
-        end,
+            vim.cmd.colorscheme "darkearth"
+        end
     }
 }
 
 local colorsProfiles = require("profiles").createProfiles(colorschemes.catppuccin)
 
-colorsProfiles["nest"] = colorschemes.evergarden
+colorsProfiles["nest"] = colorschemes.darkearth
 
 return colorsProfiles[HOSTNAME]
