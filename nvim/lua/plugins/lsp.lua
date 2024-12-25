@@ -1,9 +1,19 @@
+local lazydev = {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opts = {
+        library = {
+            { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+        },
+    },
+}
 local lspconfig = {
     'neovim/nvim-lspconfig',
     lazy = false,
     dependencies = {
         'williamboman/mason.nvim',
-        'williamboman/mason-lspconfig.nvim'
+        'williamboman/mason-lspconfig.nvim',
+        lazydev
     },
     config = function()
         vim.api.nvim_create_autocmd("LspAttach", {
@@ -110,7 +120,7 @@ local mason_lspconfig = {
                     }
                 })
             end,
-            ["html"] = function ()
+            ["html"] = function()
                 local capabilities = vim.lsp.protocol.make_client_capabilities()
                 capabilities.textDocument.completion.completionItem.snippetSupport = true
                 require('lspconfig').html.setup({
