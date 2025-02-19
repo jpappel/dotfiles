@@ -33,6 +33,13 @@ return {
         end
         },
         {
+            "<leader>fm",
+            function()
+                require("telescope.builtin").marks()
+            end,
+            desc = "Search marks using telescope"
+        },
+        {
             "<leader>fq",
             function()
                 local themes = require("telescope.themes")

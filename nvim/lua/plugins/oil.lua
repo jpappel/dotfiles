@@ -15,14 +15,20 @@ return {
                 return
             end
 
-            if vim.api.nvim_get_current_win() == oil_winnr then
+            local focused_win = vim.api.nvim_get_current_win() == oil_winnr
+            local correct_type = vim.bo[vim.api.nvim_win_get_buf(oil_winnr)].ft == "oil"
+
+            if focused_win and correct_type then
                 vim.api.nvim_win_close(oil_winnr, false)
                 oil_winnr = nil
+            elseif not correct_type then
+                vim.cmd("topleft vsplit +Oil")
+                oil_winnr = vim.api.nvim_get_current_win()
             else
                 vim.api.nvim_set_current_win(oil_winnr)
             end
         end,
-        desc = "Open Oil file explorer in a far left split, similar to :Lexplore"
+        desc = "Toggle Oil file explorer in a far left split, similar to :Lexplore"
     } },
     cmd = "Oil"
 }
