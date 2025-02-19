@@ -87,7 +87,6 @@ def launch(address: str, port: int):
 
 if __name__ == "__main__":
     import argparse
-    # TODO: add help
     parser = argparse.ArgumentParser(
         description='A simple http echo server'
     )

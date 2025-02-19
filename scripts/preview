@@ -16,6 +16,8 @@ elif grep -q "ISO" <<< "$filetype" ; then
     filetype="iso"
 elif grep -q "PDF" <<< "$filetype"; then
     filetype="pdf"
+elif grep -q "SQLite 3" <<< "$filetype"; then
+    filetype="sqlite"
 fi
 
 case $filetype in
@@ -40,6 +42,10 @@ case $filetype in
         if [ "$remaining_lines" -gt 0 ]; then
             pdftotext -nodiag -nopgbrk "$path" - | head -n "$remaining_lines"
         fi
+        ;;
+    "sqlite")
+        file -b "$path"
+        sqlite3 -readonly "$path" ".schema"
         ;;
     *)
         file -b "$path"

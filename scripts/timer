@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+NAME="$1"
+shift
+TIME="$@"
+
+[ -z "$TIME" ] && { TIME="$NAME"; NAME="Timer"; }
+
+if $(sleep "$TIME"); then
+    notify-send -a timer "$NAME" "Elapsed: $TIME\nTimer Ended: $(date +%T)"
+else
+    notify-send -a timer "Error" "Bad time string: $TIME"
+fi

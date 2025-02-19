@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+[ -z "$1" ] && { echo "Missing url, exitting" >&2; exit 1; }
+
+URL="$1"
+BASE_DIR="$HOME/vid/youtube"
+OUTPUT_TEMPLATE="%(uploader)s/%(title)s.%(ext)s"
+PLAYLIST="$HOME/vid/playlists/watch_later"
+
+[ -n "$2" ] && PLAYLIST="$2"
+[ -d "$PLAYLIST" ] || mkdir -p $(dirname "$PLAYLIST")
+
+FILE="$BASE_DIR/$(yt-dlp --restrict-filenames -O "$OUTPUT_TEMPLATE" "$URL")"
+
+yt-dlp --embed-subs --embed-metadata --sponsorblock-mark all \
+    --yes-playlist \
+    -P $BASE_DIR -o "$OUTPUT_TEMPLATE" --restrict-filenames \
+    --format bestvideo+bestaudio \
+    "$URL" && {
+    echo "$FILE" >> "$PLAYLIST"
+    echo "$FILE    $URL" >> "$BASE_DIR/urls"
+    notify-send "Downloaded Vid" "$(basename "$FILE")"
+    }
