@@ -7,7 +7,7 @@ return {
     cmd = 'Telescope',
     keys = {
         {
-            "<leader>ff",
+            "<C-f>f",
             function()
                 local builtin = require("telescope.builtin")
                 builtin.find_files()
@@ -15,32 +15,32 @@ return {
             desc = "Search for files (respcting .gitignore) using Telescope"
         },
         {
-            "<leader>fF",
+            "<C-f>F",
             function()
                 require("telescope.builtin").find_files({ hidden = true, no_ignore_parent = true })
             end,
             desc = "Search for files (including hidden) using Telescope"
         },
         {
-            "<leader>fb",
+            "<C-f>b",
             function()
                 require("telescope.builtin").buffers()
             end,
             desc = "Search for open buffers using Telescope"
         },
-        { "<leader>fg", function()
+        { "<C-f>g", function()
             require("telescope.builtin").live_grep()
         end
         },
         {
-            "<leader>fm",
+            "<C-f>m",
             function()
                 require("telescope.builtin").marks()
             end,
             desc = "Search marks using telescope"
         },
         {
-            "<leader>fq",
+            "<C-f>q",
             function()
                 local themes = require("telescope.themes")
                 require("telescope.builtin").quickfix(themes.get_ivy({}))
@@ -48,7 +48,7 @@ return {
             desc = "Search in the the quickfix buffer using Telescope"
         },
         {
-            "<leader>fl",
+            "<C-f>l",
             function()
                 local themes = require("telescope.themes")
                 require("telescope.builtin").loclist(themes.get_ivy({}))
@@ -56,7 +56,7 @@ return {
             desc = "Search within a location list using Telescope"
         },
         {
-            "<leader>fd",
+            "<C-f>d",
             function()
                 local themes = require("telescope.themes")
                 require("telescope.builtin").diagnostics(themes.get_ivy({}))
@@ -64,7 +64,7 @@ return {
             desc = "Search through diagnostics using Telescope"
         },
         {
-            "<leader>fr",
+            "<C-f>r",
             function()
                 -- TODO: if lsp supports reference provider and lsp is attached
                 -- [telescope.builtin.lsp_*]: server does not support referencesProvider

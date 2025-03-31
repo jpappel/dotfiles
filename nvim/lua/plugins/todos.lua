@@ -83,7 +83,7 @@ return {
             desc = "Previous todo comment"
         },
         {
-            "<leader>ft",
+            "<C-f>t",
             "<cmd>TodoTelescope<cr>",
             mode = 'n',
             desc = "Open Todos in quickfix list"

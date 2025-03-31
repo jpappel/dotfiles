@@ -2,6 +2,9 @@ local shared = require('shared')
 
 local M = {}
 
+-- disable ctrl-f to work nicer with telescope binds
+vim.keymap.set('n', '<C-f>', '<NOP>')
+
 vim.keymap.set('n', 'gf', function() shared.cmd_pcall(':e <cfile>') end, { noremap = true })
 vim.keymap.set('n', "<Leader>q", function()
         if vim.o.ft == "qf" then

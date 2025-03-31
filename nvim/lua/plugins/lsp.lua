@@ -49,7 +49,7 @@ local lspconfig = {
             desc = "Rename symbol"
         },
         {
-            '<C-f>',
+            '<leader>f',
             function()
                 vim.lsp.buf.format()
             end,
