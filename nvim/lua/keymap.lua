@@ -16,8 +16,6 @@ vim.keymap.set('n', "<Leader>q", function()
     { noremap = true, desc = "Toggle bottom quickfix window" })
 vim.keymap.set('n', "<Leader>l", function() shared.cmd_pcall(':aboveleft lope') end)
 vim.keymap.set('n', "<Leader>dk", function() vim.diagnostic.open_float() end)
-vim.keymap.set('n', "[q", "<cmd>cprev<cr>", { noremap = true })
-vim.keymap.set('n', "]q", "<cmd>cnext<cr>", { noremap = true })
 
 -- Send visual selection to quickfix list
 vim.keymap.set('v', "<C-q>", function()

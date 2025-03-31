@@ -41,14 +41,7 @@ local lspconfig = {
             desc = "Go to definition"
         },
         {
-            '<leader>r',
-            function()
-                vim.lsp.buf.rename()
-            end,
-            mode = 'n',
-            desc = "Rename symbol"
-        },
-        {
+            -- TODO: consider changing binding to grf
             '<leader>f',
             function()
                 vim.lsp.buf.format()
@@ -56,30 +49,6 @@ local lspconfig = {
             mode = { 'n', 'v' },
             desc = "Format code"
         },
-        {
-            '<leader>a',
-            function()
-                vim.lsp.buf.code_action()
-            end,
-            mode = { 'n', 's' },
-            desc = "Show code actions"
-        },
-        {
-            '<leader>lr',
-            function()
-                vim.lsp.buf.references()
-            end,
-            mode = 'n',
-            desc = "Add symbol references to qf"
-        },
-        {
-            '<C-h>',
-            function()
-                vim.lsp.buf.signature_help()
-            end,
-            mode = 'i',
-            desc = "Show signature help"
-        }
     }
 }
 
