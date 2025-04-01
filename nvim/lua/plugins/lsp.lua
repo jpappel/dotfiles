@@ -35,6 +35,7 @@ local lspconfig = {
         {
             'gd',
             function()
+                -- TODO: add fallback to default gd + warning
                 vim.lsp.buf.definition()
             end,
             mode = 'n',
@@ -46,9 +47,27 @@ local lspconfig = {
             function()
                 vim.lsp.buf.format()
             end,
-            mode = { 'n', 'v' },
-            desc = "Format code"
+            mode = { 'n' },
+            desc = "Format entire buffer"
         },
+        {
+            '<leader>f',
+            function()
+                local opts = {}
+                local clients = vim.lsp.get_clients({ bufnr = 0 })
+                for _, client in ipairs(clients) do
+                    if client:supports_method("textDocument/rangesFormatting") then
+                        local range = require("shared").get_visual_range({})
+                        opts.range.start = range.start
+                        opts.range["end"] = range.stop
+                        break
+                    end
+                end
+                vim.lsp.buf.format(opts)
+            end,
+            mode = { 'v' },
+            desc = "Format visual selection"
+        }
     }
 }
 
@@ -87,20 +106,6 @@ local mason_lspconfig = {
                             }
                         }
                     }
-                })
-            end,
-            ["html"] = function()
-                local capabilities = vim.lsp.protocol.make_client_capabilities()
-                capabilities.textDocument.completion.completionItem.snippetSupport = true
-                require('lspconfig').html.setup({
-                    capabilities = capabilities,
-                })
-            end,
-            ["cssls"] = function()
-                local capabilities = vim.lsp.protocol.make_client_capabilities()
-                capabilities.textDocument.completion.completionItem.snippetSupport = true
-                require('lspconfig').cssls.setup({
-                    capabilities = capabilities,
                 })
             end,
             ["basedpyright"] = function()

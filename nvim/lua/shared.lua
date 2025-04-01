@@ -5,18 +5,44 @@ function M.cmd_pcall(string)
     local success, msg = pcall(function() vim.cmd(string) end)
     if not success then
         msg = string.match(tostring(msg), "E%d+.*")
-        vim.api.nvim_err_writeln(msg)
+        vim.api.nvim_echo({ { msg } }, true, { err = true })
     end
+end
+
+--- Get the positions of the current visual selection using (1,0) indexing
+--- @param opts {reset_mark: boolean?, reselect_text: boolean?}
+--- @return { start: integer[], stop:integer[]}
+M.get_visual_range = function(opts)
+    local old_start = {}
+    local old_stop = {}
+    if opts.reset_mark then
+        old_start = vim.api.nvim_buf_get_mark(0, "<")
+        old_stop = vim.api.nvim_buf_get_mark(0, ">")
+    end
+    -- return to normal mode to correctly set '< and '> marks
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<ESC>", true, false, true), 'x', false)
+    local start_sel = vim.api.nvim_buf_get_mark(0, "<")
+    local stop_sel = vim.api.nvim_buf_get_mark(0, ">")
+
+    if opts.reselect_text then
+        vim.cmd("normal! gv")
+    end
+
+    if opts.reset_mark then
+        vim.api.nvim_buf_set_mark(0, "<", old_start[1], old_start[2], {})
+        vim.api.nvim_buf_set_mark(0, ">", old_stop[1], old_stop[2], {})
+    end
+
+    return {
+        start = start_sel,
+        stop = stop_sel,
+    }
 end
 
 --- Get the lines of a visual selection
 --- @return { lines : string[], range : { start : integer, stop : integer } }
 M.get_visual = function()
-    -- return to normal mode to correctly set '< and '> marks
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<ESC>", true, false, true), 'x', false)
-
-    local range = { start = vim.api.nvim_buf_get_mark(0, "<")[1], stop = vim.api.nvim_buf_get_mark(0, ">")[1] }
-
+    local range = M.get_visual_range({})
     local lines = vim.api.nvim_buf_get_lines(0, range.start - 1, range.stop, false)
 
     return { lines = lines, range = range }
@@ -39,9 +65,7 @@ end
 -- Shift the visual selection by amount, clamping to buffer size
 --- @param amount integer
 function M.vert_shift_selection(amount)
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<ESC>", true, false, true), 'x', false)
-
-    local init = { start = vim.api.nvim_buf_get_mark(0, '<'), stop = vim.api.nvim_buf_get_mark(0, '>') }
+    local init = M.get_visual_range({})
     local target = {
         start = { init.start[1] + amount, init.start[2] },
         stop = { init.stop[1] + amount, init.stop[2] }
