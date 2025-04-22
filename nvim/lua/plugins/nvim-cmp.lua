@@ -147,6 +147,7 @@ local cmp = {
                 end
             },
             mapping = cmp.mapping.preset.insert({
+                -- FIXME: change to better use new Snippet defaults
                 ['<C-k>'] = cmp.mapping.scroll_docs(-5),
                 ['<C-j>'] = cmp.mapping.scroll_docs(5),
                 ['<TAB>'] = cmp.mapping(function(fallback)

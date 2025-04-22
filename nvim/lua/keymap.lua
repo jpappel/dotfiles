@@ -14,7 +14,14 @@ vim.keymap.set('n', "<Leader>q", function()
         end
     end,
     { noremap = true, desc = "Toggle bottom quickfix window" })
-vim.keymap.set('n', "<Leader>l", function() shared.cmd_pcall(':aboveleft lope') end)
+vim.keymap.set('n', "<Leader>l", function()
+        if vim.o.ft == "qf" then
+            vim.cmd('lcl')
+        else
+            shared.cmd_pcall(':aboveleft lope')
+        end
+    end,
+    { noremap = true, desc = "Toggle localtion window" })
 vim.keymap.set('n', "<Leader>dk", function() vim.diagnostic.open_float() end)
 
 -- Send visual selection to quickfix list
