@@ -1,6 +1,6 @@
-source <(fzf --zsh)
+FZF_ALT_C_COMMAND= FZF_CTRL_T_COMMAND= source <(fzf --zsh)
 
-fzf_widget() {
+fzf_smart_file_widget() {
     local selected
     local current_word
 
@@ -21,6 +21,6 @@ fzf_widget() {
     fi
     zle redisplay
 }
-zle -N fzf_widget
+zle -N fzf_smart_file_widget
 
-bindkey '^f' fzf_widget
+bindkey '^f' fzf_smart_file_widget
