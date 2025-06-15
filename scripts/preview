@@ -6,48 +6,66 @@ lines="$2"
 [ ! -e "$path" ] && { echo "$path not found" ; exit 1; }
 [ -z "$lines" ] && lines=40
 
-filetype=$(file -b "$path")
+fileinfo=$(file -b "$path")
+mimetype=$(file -b --mime-type "$path")
 
-if grep -q "text" <<< "$filetype"; then
+if grep -q "text" <<< "$mimetype"; then
     filetype="text"
-elif grep -q "archive" <<< "$filetpye"; then
+elif grep -q "archive" <<< "$fileinfo"; then
     filetype="archive"
-elif grep -q "ISO" <<< "$filetype" ; then
+elif grep -q "directory" <<< "$fileinfo"; then
+    filetype="directory"
+elif grep -q "image" <<< "$mimetype"; then
+    filetype="image"
+elif grep -q "video" <<< "$mimetype"; then
+    filetype="video"
+elif grep -q "ISO" <<< "$fileinfo" ; then
     filetype="iso"
-elif grep -q "PDF" <<< "$filetype"; then
+elif grep -q "PDF" <<< "$fileinfo"; then
     filetype="pdf"
-elif grep -q "SQLite 3" <<< "$filetype"; then
+elif grep -q "SQLite 3" <<< "$fileinfo"; then
     filetype="sqlite"
 fi
 
 case $filetype in
     "directory")
-        fd . "$path"
+        tree "$path"
         ;;
     "text")
         bat -p -r ":$lines" --color=always "$path"
         ;;
     "archive")
         echo "archive preview not currently supported"
-        file -b "$path"
+        echo "$fileinfo"
         ;;
     "iso")
         isoinfo -l -i "$path" | head -n "$lines"
         ;;
     "pdf")
         info=$(pdfinfo "$path")
-        remaining_lines=$(echo "$lines - $(echo $info | wc -l) -1" | bc)
+        remaining_lines=$(($lines - $(echo $info | wc -l) -1))
         echo "$info"
-        echo "--------------"
         if [ "$remaining_lines" -gt 0 ]; then
+            echo "--------------"
             pdftotext -nodiag -nopgbrk "$path" - | head -n "$remaining_lines"
         fi
         ;;
     "sqlite")
-        file -b "$path"
+        echo "$fileinfo"
         sqlite3 -readonly "$path" ".schema"
         ;;
+    "video")
+        echo "$fileinfo"
+        ffmpeg -loglevel fatal -i "$path" -f ffmetadata - |\
+            tail -n +2 | sed 's/\\$//' | head -n "$lines"
+        ;;
+    "image")
+        echo "$fileinfo"
+        if command -v img2txt > /dev/null; then
+            img2txt -H $(($lines -1)) "$path"
+        fi
+        ;;
     *)
-        file -b "$path"
+        echo "$fileinfo"
         ;;
 esac
