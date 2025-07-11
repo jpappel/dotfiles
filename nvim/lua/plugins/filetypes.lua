@@ -30,6 +30,9 @@ return {
             "tpope/vim-dadbod",
             'kristijanhusak/vim-dadbod-completion'
         },
+        keys = {
+            { '<leader>sf', vim.cmd.DBUIToggle, desc = "Toggle dadbod ui" },
+        },
         cmd = {
             'DBUI',
             'DBUIToggle',

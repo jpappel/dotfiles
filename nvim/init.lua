@@ -51,6 +51,7 @@ vim.opt.signcolumn = "yes"
 
 -- Status line
 vim.opt.laststatus = 3
+vim.opt.statusline = '%3{mode()} %m | %-t %= %([%R%Y]%) %c,%l %3p%%'
 
 vim.opt.showtabline = 1
 
