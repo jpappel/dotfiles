@@ -39,7 +39,6 @@ vim.opt.cursorline = true
 vim.opt.linebreak = true
 vim.opt.title = true
 vim.opt.showmatch = true
-vim.opt.showmode = false
 vim.opt.mouse = "anv"
 
 --change mouse menu
@@ -51,7 +50,82 @@ vim.opt.signcolumn = "yes"
 
 -- Status line
 vim.opt.laststatus = 3
-vim.opt.statusline = '%3{mode()} %m | %-t %= %([%R%Y]%) %c,%l %3p%%'
+
+local statusline_group = vim.api.nvim_create_augroup("custom.statusline", { clear = false })
+-- PERF: this event fires often, should consider debouncing it
+vim.api.nvim_create_autocmd('DiagnosticChanged', {
+    desc = "Set diagnostic counts for statusline",
+    group = statusline_group,
+    callback = function(_)
+        local counts = vim.diagnostic.count()
+        local s = ''
+        for i = 1, 4, 1 do
+            if counts[i] ~= nil then
+                if #s > 0 then
+                    s = s .. ' | '
+                end
+
+                if i == 1 then
+                    s = s .. "%#DiagnosticError#E:"
+                elseif i == 2 then
+                    s = s .. "%#DiagnosticWarn#W:"
+                elseif i == 3 then
+                    s = s .. "%#DiagnosticInfo#I:"
+                elseif i == 4 then
+                    s = s .. "%#DiagnosticHint#H:"
+                end
+                s = s .. tostring(counts[i]) .. "%*"
+            end
+        end
+        vim.api.nvim_set_var('diagnosticCounts', s)
+    end
+})
+
+-- PERF: consider debouncing
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufWritePost' }, {
+    desc = "Update git info in statusline",
+    group = statusline_group,
+    callback = function(arg)
+        if not vim.bo[arg.buf].modifiable then
+            return
+        end
+        vim.system({ "git", "diff", "--numstat", arg.file }, { text = true }, vim.schedule_wrap(function(out)
+            if out.code ~= 0 or out.stdout == nil then
+                if vim.b["gitDelta"] then
+                    vim.api.nvim_buf_del_var(arg.buf, "gitDelta")
+                end
+            else
+                local parts = vim.split(out.stdout, '\t')
+                if #parts ~= 3 then
+                    return
+                end
+                local s = "git:" .. "%#DiffAdd#+" .. parts[1] .. "%* " ..
+                    "%#DiffDelete#-" .. parts[2] .. "%*"
+                vim.api.nvim_buf_set_var(arg.buf, "gitDelta", s)
+            end
+        end))
+    end
+})
+
+vim.cmd([[
+    func! StatuslineDiagnostics() abort
+        if exists("g:diagnosticCounts")
+            return g:diagnosticCounts
+        else
+            return ''
+        endif
+    endfunc
+    func! StatuslineGit() abort
+        if exists("b:gitDelta")
+            return b:gitDelta
+        else
+            return ''
+        endif
+    endfunc
+]])
+
+vim.opt.statusline =
+'%-t %= %-{%StatuslineDiagnostics()%} %1(%M%) %{%StatuslineGit()%} %= %-([%R%Y]%) %#LineNr#%c,%l%* %#LineNrAbove#%3p%%'
 
 vim.opt.showtabline = 1
 
