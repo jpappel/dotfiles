@@ -51,12 +51,25 @@ vim.opt.signcolumn = "yes"
 -- Status line
 vim.opt.laststatus = 3
 
+-- NOTE: potential issues using non-monotonic clock
+--       use uv.new_timer
+local debounce = {
+    diagnostic = vim.uv.new_timer()
+}
+
+debounce.diagnostic:start(50, 0, function()
+end)
+
 local statusline_group = vim.api.nvim_create_augroup("custom.statusline", { clear = false })
--- PERF: this event fires often, should consider debouncing it
 vim.api.nvim_create_autocmd('DiagnosticChanged', {
     desc = "Set diagnostic counts for statusline",
     group = statusline_group,
     callback = function(_)
+        if debounce.diagnostic:get_due_in() ~= 0 then
+            return
+        end
+        debounce.diagnostic:start(50, 0, function() end)
+
         local counts = vim.diagnostic.count()
         local s = ''
         for i = 1, 4, 1 do
@@ -80,6 +93,7 @@ vim.api.nvim_create_autocmd('DiagnosticChanged', {
         vim.api.nvim_set_var('diagnosticCounts', s)
     end
 })
+
 
 -- PERF: consider debouncing
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufWritePost' }, {
@@ -125,7 +139,9 @@ vim.cmd([[
 ]])
 
 vim.opt.statusline =
-'%-t %= %-{%StatuslineDiagnostics()%} %1(%M%) %{%StatuslineGit()%} %= %-([%R%Y]%) %#LineNr#%c,%l%* %#LineNrAbove#%3p%%'
+    '%-t %= ' ..
+    '%-{%StatuslineDiagnostics()%} %1(%M%) %{%StatuslineGit()%} %= ' ..
+    '%-(%#Delimiter#[%#Operator#%R%Y%#Delimiter#]%*%) %#LineNr#%c,%l%* %#LineNrAbove#%3p%%'
 
 vim.opt.showtabline = 1
 
