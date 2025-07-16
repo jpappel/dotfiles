@@ -143,6 +143,8 @@ vim.opt.statusline =
     '%-{%StatuslineDiagnostics()%} %1(%M%) %{%StatuslineGit()%} %= ' ..
     '%-(%#Delimiter#[%#Operator#%R%Y%#Delimiter#]%*%) %#LineNr#%c,%l%* %#LineNrAbove#%3p%%'
 
+
+-- tabline
 vim.opt.showtabline = 1
 
 vim.opt.list = true
