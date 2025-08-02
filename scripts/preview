@@ -17,6 +17,8 @@ elif grep -q "directory" <<< "$fileinfo"; then
     filetype="directory"
 elif grep -q "image" <<< "$mimetype"; then
     filetype="image"
+elif grep -q "audio" <<< "$mimetype"; then
+    filetype="audio"
 elif grep -q "video" <<< "$mimetype"; then
     filetype="video"
 elif grep -q "ISO" <<< "$fileinfo" ; then
@@ -35,7 +37,13 @@ case $filetype in
         bat -p -r ":$lines" --color=always "$path"
         ;;
     "archive")
-        echo "archive preview not currently supported"
+        if [[ $mimetype == "application/zip" ]] ; then
+            unzip -l "$path"
+        elif [[ $mimetype == "application/x-tar" ]] ; then
+            tar -t -f "$path"
+        else
+            echo "this archive format is currently unsupported"
+        fi
         echo "$fileinfo"
         ;;
     "iso")
@@ -54,7 +62,7 @@ case $filetype in
         echo "$fileinfo"
         sqlite3 -readonly "$path" ".schema"
         ;;
-    "video")
+    "video"|"audio")
         echo "$fileinfo"
         ffmpeg -loglevel fatal -i "$path" -f ffmetadata - |\
             tail -n +2 | sed 's/\\$//' | head -n "$lines"
