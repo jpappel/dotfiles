@@ -21,7 +21,7 @@ vim.keymap.set('n', "<Leader>l", function()
             shared.cmd_pcall(':aboveleft lope')
         end
     end,
-    { noremap = true, desc = "Toggle localtion window" })
+    { noremap = true, desc = "Toggle location list window" })
 vim.keymap.set('n', "<Leader>dk", function() vim.diagnostic.open_float() end)
 
 -- Send visual selection to quickfix list

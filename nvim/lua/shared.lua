@@ -43,7 +43,7 @@ end
 --- @return { lines : string[], range : { start : integer, stop : integer } }
 M.get_visual = function()
     local range = M.get_visual_range({})
-    local lines = vim.api.nvim_buf_get_lines(0, range.start[0] - 1, range.stop[0], false)
+    local lines = vim.api.nvim_buf_get_lines(0, range.start[1] - 1, range.stop[1], false)
 
     return { lines = lines, range = range }
 end
