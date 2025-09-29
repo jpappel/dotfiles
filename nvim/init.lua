@@ -41,7 +41,6 @@ vim.opt.title = true
 vim.opt.showmatch = true
 vim.opt.showmode = false
 vim.opt.mouse = "anv"
-vim.opt.winborder = "single"
 
 --change mouse menu
 vim.api.nvim_command([[aunmenu PopUp.How-to\ disable\ mouse]])

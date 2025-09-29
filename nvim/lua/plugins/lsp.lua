@@ -42,8 +42,7 @@ local lspconfig = {
             desc = "Go to definition"
         },
         {
-            -- TODO: consider changing binding to grf
-            '<leader>f',
+            'grf',
             function()
                 vim.lsp.buf.format()
             end,
@@ -51,7 +50,7 @@ local lspconfig = {
             desc = "Format entire buffer"
         },
         {
-            '<leader>f',
+            'grf',
             function()
                 local opts = {}
                 local clients = vim.lsp.get_clients({ bufnr = 0 })
@@ -67,7 +66,17 @@ local lspconfig = {
             end,
             mode = { 'v' },
             desc = "Format visual selection"
-        }
+        },
+        {
+            'K',
+            function()
+                vim.lsp.buf.hover({
+                    border = "single"
+                })
+            end,
+            mode = {'n', 'v'},
+            desc = "Open lsp hover"
+        },
     }
 }
 
@@ -77,6 +86,7 @@ local mason = {
     build = ":MasonUpdate"
 }
 
+-- PERF: very slow to load
 local mason_lspconfig = {
     'williamboman/mason-lspconfig.nvim',
     dependencies = {
@@ -85,28 +95,16 @@ local mason_lspconfig = {
     opts = {
         ensure_installed = {
             "basedpyright",
-            "clangd",
             "cssls",
-            "gopls",
             "html",
             "ruff",
             "ts_ls"
 
         },
         handlers = {
+            -- TODO: change config to vim.lsp.config
             function(server_name)
                 require('lspconfig')[server_name].setup({})
-            end,
-            ["lua_ls"] = function()
-                require('lspconfig').lua_ls.setup({
-                    settings = {
-                        Lua = {
-                            diagnostics = {
-                                globals = { "vim" }
-                            }
-                        }
-                    }
-                })
             end,
             ["basedpyright"] = function()
                 require('lspconfig').basedpyright.setup({
