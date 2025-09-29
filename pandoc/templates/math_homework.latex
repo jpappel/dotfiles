@@ -19,7 +19,7 @@ $for(classoption)$
   $classoption$$sep$,
 $endfor$
 ]{$documentclass$}
-\usepackage{mathtools,amssymb}
+\usepackage{mathtools,amsmath,amssymb}
 \usepackage{mathrsfs}
 $if(fontfamily)$
 \usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
@@ -342,6 +342,9 @@ $if(tikz)$
 $endif$
 
 $if(math)$
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\DeclareMathOperator{\Image}{im}
     $for(math)$
     $if(math.proof)$
 \usepackage{amsthm}
@@ -359,8 +362,15 @@ $if(math)$
 \newtheorem{case}{Case}
 \newtheorem*{case*}{Case}
 \newtheorem{lemma}{Lemma}
-\newcommand{\foo}{\textbf{foo}}
-    $endif$
+    $endif$ %math.proof
+    $if(math.linear_algebra)$
+\DeclareMathOperator{\tr}{tr} % trace
+\DeclareMathOperator{\diag}{diag} % diagonal matrix
+    $endif$ % math.linear_algebra
+    $if(math.optimization)$
+    \DeclareMathOperator*{\argmax}{argmax}
+    \DeclareMathOperator*{\argmin}{argmin}
+    $endif$ % math.optimization
     $if(math.geometry)$
 \newcommand{\Line}{\overleftrightarrow}
 \newcommand{\Linesegment}{\overline}
@@ -368,29 +378,30 @@ $if(math)$
 \newcommand{\Yar}{\overleftarrow}
 \newcommand{\Arc}{\overgroup}
 \newcommand{\Circle}{\mathord{\odot}}
-    $endif$
+    $endif$ % math.geometry
     $if(tikz)$
         $if(math.geometry)$
 \usepackage{tkz-euclide}
-        $endif$
+        $endif$ % math.geometry
         $if(math.graphs)$
 \tikzset{
     lvertex/.style={circle,draw,minimum size=1.5em},
     vertex/.style={circle,fill=black},
     edge/.style={->,> = latex'}
 }
-        $endif$
-    $endif$
+        $endif$ % math.graphs
+    $endif$ % tikz
     $if(math.complex)$
 \renewcommand{\Re}{\operatorname{Re}}
 \renewcommand{\Im}{\operatorname{Im}}
 \newcommand{\conjugate}[1]{\overline{#1}}
 \newcommand{\modulus}[1]{\left|#1\right|}
-\DeclareMathOperator\Arg{Arg}
-\DeclareMathOperator\Log{Log}
-    $endif$
-    $endfor$
-$endif$
+\DeclareMathOperator{\Arg}{Arg}
+\DeclareMathOperator{\Log}{Log}
+\DeclareMathOperator{\Residue}{Res}
+    $endif$ % math.complex
+    $endfor$ %for math
+$endif$ % math
 
 \begin{document}
 $if(has-frontmatter)$
