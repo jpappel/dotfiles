@@ -1,0 +1,22 @@
+export EDITOR=vim
+export VISUAL=vim
+
+export LESSHISTFILE=/dev/null
+
+#XDG BASE DIR
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_RUNTIME_DIR="/tmp/runtime-$USER"
+
+#FZF
+export FZF_DEFAULT_OPTS_FILE="$HOME/.config/fzf/fzfrc"
+
+# Terminfo
+export TERMINFO="$XDG_DATA_HOME/terminfo"
+export TERMINFO_DIRS="$TERMINFO:/usr/share/terminfo"
+
+# XDG Directory fixes
+export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
+export SQLITE_HISTORY="$XDG_CACHE_HOME/sqlite_history"

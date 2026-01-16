@@ -1,0 +1,11 @@
+# sane defaults
+alias ll="ls -lhAG --color=auto"
+alias ls="ls --color=auto"
+
+# common programs
+alias vim=$EDITOR
+alias e=$EDITOR
+alias p=preview
+alias grep=rg
+alias gr=rg
+alias o=xdg-open
