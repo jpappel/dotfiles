@@ -342,9 +342,13 @@ $if(tikz)$
 $endif$
 
 $if(math)$
-\newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
 \DeclareMathOperator{\Image}{im}
+\renewcommand{\epsilon}{\varepsilon}
     $for(math)$
     $if(math.proof)$
 \usepackage{amsthm}
@@ -362,14 +366,36 @@ $if(math)$
 \newtheorem{case}{Case}
 \newtheorem*{case*}{Case}
 \newtheorem{lemma}{Lemma}
+\newtheorem*{lemma*}{Lemma}
     $endif$ %math.proof
+    $if(math.sets)$
+    \renewcommand{\emptyset}{\varnothing}
+    $endif$ %math.sets
+    $if(math.topology)$
+\newcommand{\closure}[1]{\overline{#1}}
+\newcommand{\interior}[1]{#1^\circ}
+    $endif$ %math.topology
+    $if(math.measure)$
+    $endif$ % math.measure
+    $if(math.algebra)$
+\newcommand{\subgroup}{\leq}
+\newcommand{\normsubgroup}{\trianglelefteq}
+\newcommand{\isom}{\cong}
+\DeclareMathOperator{\Tor}{Tor} % set of torsion elements
+\DeclareMathOperator{\Aut}{Aut} % automorphisms
+\DeclareMathOperator{\End}{End} % endomorphisms
+\DeclareMathOperator{\Hom}{Hom} % homomorphisms
+    $endif$ % math.algebra
     $if(math.linear_algebra)$
 \DeclareMathOperator{\tr}{tr} % trace
 \DeclareMathOperator{\diag}{diag} % diagonal matrix
+\DeclareMathOperator{\rank}{rank}
+\newcommand{\triplenorm}[1]{\left\lvert\!\left\lVert #1 \right\lVert\!\right\lvert}
     $endif$ % math.linear_algebra
     $if(math.optimization)$
     \DeclareMathOperator*{\argmax}{argmax}
     \DeclareMathOperator*{\argmin}{argmin}
+    \newcommand{\grad}{\nabla}
     $endif$ % math.optimization
     $if(math.geometry)$
 \newcommand{\Line}{\overleftrightarrow}
