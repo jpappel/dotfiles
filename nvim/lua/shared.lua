@@ -100,4 +100,50 @@ function M.vert_shift_selection(amount)
     vim.cmd("normal! gv")
 end
 
+--- Build a set from a list
+--- @generic T
+--- @param list T[]
+--- @return table<T, boolean>
+function M.to_set(list)
+    --- @type table<T, boolean>
+    local set = {}
+
+    for _, v in ipairs(list) do
+        set[v] = true
+    end
+
+    return set
+end
+
+--- Computes A \ B
+--- @generic T
+--- @param A table<T, boolean>
+--- @param B table<T, boolean>
+--- @return table<T, boolean>
+function M.set_difference(A, B)
+    --- @type table<T, boolean>
+    local diff = {}
+
+    for k, v in pairs(A) do
+        if v and not B[k] then
+            diff[k] = true
+        end
+    end
+
+    return diff
+end
+
+--- Get keys of table
+--- @generic T
+--- @param tbl table<T, any>
+--- @return T[]
+function M.keys(tbl)
+    local keys = {}
+    for k, _ in pairs(tbl) do
+        table.insert(keys, k)
+    end
+
+    return keys
+end
+
 return M
