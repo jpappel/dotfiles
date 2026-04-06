@@ -3,6 +3,16 @@
 year="$(date '+%Y')"
 usage="Usage: $0 <command> [-r <remote>] [-y <year>]"
 
+rsync_flags=""
+if !command rsync >/dev/null  2>&1; then
+    echo "Missing 'rsync' program" >2
+    exit 2
+elif rsync --version | grep "openrsync" >/dev/null 2>&1; then
+    rsync_flags="-aiuvzP"
+else
+    rsync_flags="-aiuvzCP"
+fi
+
 print_help() {
     cat << EOF
 $usage
@@ -64,12 +74,12 @@ find_remote(){
 
 push_data(){
     local lroot="$1"
-    rsync -aiuvzCP --exclude-from="$lroot/.syncignore" "$lroot/$year" "$remote_root"
+    rsync $rsync_flags --exclude-from="$lroot/.syncignore" "$lroot/$year" "$remote_root"
 }
 
 pull_data(){
     local lroot="$1"
-    rsync -aiuvzCP "$remote_root/$year" "$lroot"
+    rsync $rsync_flags "$remote_root/$year" "$lroot"
 }
 
 check_requirements
