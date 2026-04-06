@@ -370,6 +370,7 @@ $if(math)$
     $endif$ %math.proof
     $if(math.sets)$
     \renewcommand{\emptyset}{\varnothing}
+    \newcommand{\powerset}[1]{\mathcal{P}\left(#1\right)}
     $endif$ %math.sets
     $if(math.topology)$
 \newcommand{\closure}[1]{\overline{#1}}

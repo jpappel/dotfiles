@@ -1,17 +1,5 @@
 return {
     {
-        'vim-pandoc/vim-pandoc',
-        enabled = false,
-        ft = { "markdown", "pandoc" },
-        -- keys = {
-        --     { 'gO', vim.cmd.TOC, desc = "Table of contents" }
-        -- }
-    },
-    {
-        'vim-pandoc/vim-pandoc-syntax',
-        ft = { "markdown", "pandoc" }
-    },
-    {
         "tpope/vim-dadbod",
         lazy = true
     },
