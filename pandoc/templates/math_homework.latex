@@ -377,6 +377,7 @@ $if(math)$
 \newcommand{\interior}[1]{#1^\circ}
     $endif$ %math.topology
     $if(math.measure)$
+    \newcommand{\borelalg}{\mathscr{B}}
     $endif$ % math.measure
     $if(math.algebra)$
 \newcommand{\subgroup}{\leq}
