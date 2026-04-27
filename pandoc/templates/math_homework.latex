@@ -378,6 +378,7 @@ $if(math)$
     $endif$ %math.topology
     $if(math.measure)$
     \newcommand{\borelalg}{\mathscr{B}}
+    \newcommand{\indicator}[1]{\mathbb{1}_{#1}}
     $endif$ % math.measure
     $if(math.algebra)$
 \newcommand{\subgroup}{\leq}
