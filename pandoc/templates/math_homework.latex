@@ -348,6 +348,7 @@ $if(math)$
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\N}{\mathbb{N}}
 \DeclareMathOperator{\Image}{im}
+\DeclareMathOperator{\sign}{sign}
 \renewcommand{\epsilon}{\varepsilon}
     $for(math)$
     $if(math.proof)$
@@ -375,11 +376,15 @@ $if(math)$
     $if(math.topology)$
 \newcommand{\closure}[1]{\overline{#1}}
 \newcommand{\interior}[1]{#1^\circ}
+\DeclareMathOperator{\supp}{supp}
     $endif$ %math.topology
     $if(math.measure)$
     \newcommand{\borelalg}{\mathscr{B}}
     \newcommand{\indicator}[1]{\mathbb{1}_{#1}}
     $endif$ % math.measure
+    $if(math.probability)$
+    \newcommand{\prob}{\mathbb{P}}
+    $endif$ % math.probability
     $if(math.algebra)$
 \newcommand{\subgroup}{\leq}
 \newcommand{\normsubgroup}{\trianglelefteq}
@@ -428,6 +433,11 @@ $if(math)$
 \DeclareMathOperator{\Arg}{Arg}
 \DeclareMathOperator{\Log}{Log}
 \DeclareMathOperator{\Residue}{Res}
+% jacobi eliptic functions
+\DeclareMathOperator{\sn}{sn}
+\DeclareMathOperator{\cn}{cn}
+\DeclareMathOperator{\dn}{dn}
+\DeclareMathOperator{\am}{am}
     $endif$ % math.complex
     $endfor$ %for math
 $endif$ % math
