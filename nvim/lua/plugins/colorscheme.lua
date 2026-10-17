@@ -67,5 +67,6 @@ local colorschemes = {
 local colorsProfiles = require("profiles").createProfiles(colorschemes.catppuccin)
 
 colorsProfiles["nest"] = colorschemes.darkearth
+colorsProfiles["cage"] = colorschemes.darkearth
 
 return colorsProfiles[HOSTNAME]

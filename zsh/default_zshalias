@@ -6,6 +6,7 @@ alias ls="ls --color=auto"
 alias vim=$EDITOR
 alias e=$EDITOR
 alias p=preview
-alias grep=rg
-alias gr=rg
+alias grep=$GREP
+alias gr=$GREP
 alias o=xdg-open
+alias a=atlas

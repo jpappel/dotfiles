@@ -1,0 +1,75 @@
+/* TODO: style 
+ *
+ * [ ] colors
+ *
+ * [ ] workspaces
+ * [ ] tray
+ * [ ] mpris
+ * [ ] wireplumber
+ * [ ] network
+ * [ ] bluetooth
+ * [ ] battery
+ * [ ] clock
+ *
+ * */
+
+* {
+    
+    background-color: unset;
+    color: #cfc797;
+}
+
+.modules-right {
+    background-color: #091919;
+}
+
+#workspaces {
+    background-color: #091919;
+}
+
+/* doesn't stay background cover when hovering */
+#workspaces button:hover {
+    background-color: #003136;
+    box-shadow: inset 0 -3px #cfc797;
+}
+
+#workspaces button.active {
+    background-color: #438566;
+    box-shadow: inset 0 -3px #cfc797;
+}
+
+#workspaces button.urgent {
+    background-color: #732d35;
+}
+
+#tray {
+    background-color: red;
+}
+
+#mpris {
+    background-color: #091919;
+}
+
+#wireplumber {
+    background-color: #643875;
+    padding: 0.25em;
+}
+
+#network {
+    background-color: #ab710e;
+    padding: 0.25em;
+}
+
+#bluetooth {
+    background-color: #254e76;
+    padding: 0.25em;
+}
+
+#battery {
+    padding: 0.25em;
+}
+
+#clock {
+    background-color: #438566;
+    padding: 0.25em;
+}

@@ -1,5 +1,6 @@
 export EDITOR=vim
 export VISUAL=vim
+export GREP=grep
 
 export LESSHISTFILE=/dev/null
 

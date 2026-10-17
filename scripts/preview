@@ -71,6 +71,8 @@ case $filetype in
         echo "$fileinfo"
         if command -v img2txt > /dev/null; then
             img2txt -H $(($lines -1)) "$path"
+        else
+            echo "No available image previewer: consider installing 'img2txt'" >&2
         fi
         ;;
     *)
