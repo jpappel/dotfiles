@@ -1,0 +1,41 @@
+set statusbar-home-tilde true
+
+set default-bg '#011111'
+set default-fg '#e6e7e7'
+
+set font '"Fira Code" normal 12'
+
+# completion
+set completion-bg '#091919'
+set completion-fg '#cfc797'
+set completion-group-bg '#003136'
+set completion-group-fg '#cfc797'
+set completion-highlight-bg '#438566'
+set completion-highlight-fg '#cfc797'
+
+# input
+set inputbar-bg '#003136'
+set inputbar-fg '#cfc797'
+
+# notification
+set notification-bg '#003136'
+set notification-fg '#cfc797'
+set notification-error-bg '#732d35'
+set notification-error-fg '#e4a44d'
+set notification-warning-bg '#e4a44d'
+set notification-warning-fg '#bfc3c3'
+
+# statusbar
+set statusbar-bg '#011111'
+set statusbar-fg '#e6e7e7'
+
+# highlights
+set highlight-active-color 'rgba(228,164,77,0.5)'
+set highlight-color '#7ba47d7f'
+#set highlight-fg '#732d357f'
+
+# index
+set index-bg '#091919'
+set index-fg '#cfc797'
+set index-active-bg '#438566'
+set index-active-fg '#cfc797'
